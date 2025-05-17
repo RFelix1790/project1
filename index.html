@@ -3,7 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <title>High Noon Showdown</title>
   </head>
-  <body></body>
+  <body>
+    <section id="mainMenu">
+      <div>
+        <h1><strong>High Noon Showdown</strong></h1>
+        <p>Are you ready?</p>
+        <button id="start-button">Start Game</button>
+        <p>Shoot the cowboys, but careful! there might be civilians close by</p>
+      </div>
+    </section>
+
+    <section id="gameContainer">
+      <div>
+        <h2>Stats</h2>
+        <p>Score: <span id="score">0</span></p>
+        <p>Lives: <span id="lives">3</span></p>
+      </div>
+      <div id="game-screen"></div>
+    </section>
+
+    <section id="endGame">
+      <div>
+        <h1>Game Over</h1>
+        <br />
+        <button id="restart-button">Restart</button>
+      </div>
+    </section>
+
+    <script type="text/javascript" src="game.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
 </html>
