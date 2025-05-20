@@ -1,0 +1,21 @@
+#gameContainer {
+    background-color: aqua;
+    display: flex;
+    justify-content: flex-start;
+}
+#gameContainer {
+    display: none;
+    
+}
+#gameScreen{
+background-image: url("/vila-de-cowboys.jpg");
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+     background-size: cover;
+  background-position: center;
+    overflow: hidden;
+}
+#endGame {
+    display: none;
+}
