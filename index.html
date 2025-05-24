@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/styles/style.css" />
     <title>High Noon Showdown</title>
   </head>
   <body>
@@ -17,8 +17,12 @@
     </section>
 
     <section id="gameContainer">
-      <div>
-        <img class="village" src="/vila-de-cowboys.jpg" alt="village" />
+      <div style="position: relative">
+        <div class="hud">
+          <p class="score">score: 0</p>
+          <p class="lives">lives: 3</p>
+        </div>
+        <img class="village" src="/styles/vila-de-cowboys.jpg" alt="village" />
       </div>
     </section>
 
@@ -26,11 +30,23 @@
       <div>
         <h1>Game Over</h1>
         <br />
-        <button id="restart-button">Restart</button>
+        <button class="restart-button">Restart</button>
+        <button class="backToMainMenu">Main menu</button>
       </div>
     </section>
 
-    <script type="text/javascript" src="game.js"></script>
-    <script type="text/javascript" src="script.js"></script>
+    <section id="winnerScreen">
+      <div>
+        <h1>You saved the city !!!</h1>
+        <br />
+        <button class="restart-button">Restart</button>
+        <button class="backToMainMenu">Main menu</button>
+      </div>
+    </section>
+    <script>
+      src = "js/player.js";
+    </script>
+    <script type="text/javascript" src="js/game.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
   </body>
 </html>

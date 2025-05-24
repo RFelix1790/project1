@@ -1,0 +1,49 @@
+#mainMenu {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#gameContainer {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+.hud {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  color: white;
+  font-size: 30px;
+}
+.score,
+.lives {
+  margin: 0;
+  line-height: 1;
+}
+.village {
+  margin: auto;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  width: 90%;
+  height: 100vh;
+}
+#endGame {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+}
+
+#winnerScreen {
+  display: none;
+}
