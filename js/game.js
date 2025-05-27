@@ -12,15 +12,17 @@ class Game {
     this.height = 600;
     this.width = 500;
     this.position = [
-      { top: 120, left: 320, isActivated: false },
-      { top: 500, left: 250, isActivated: false },
-      { top: 190, left: 750, isActivated: false },
-      { top: 460, left: 750, isActivated: false },
-      { top: 200, left: 1100, isActivated: false },
-      { top: 500, left: 1100, isActivated: false },
+      { top: 950, left: 1900, isActivated: false },
+      { top: 900, left: 1270, isActivated: false },
+      { top: 900, left: 750, isActivated: false },
+      { top: 340, left: 320, isActivated: false },
+      { top: 475, left: 1270, isActivated: false },
+      { top: 400, left: 1900, isActivated: false },
     ];
-    this.gmaIntervalId = null;
+    this.gameIntervalId = null;
     this.obstacleInterval = null;
+    this.obstacles = [];
+    this.player = new Player(this.gameContainer, 1200, 1100, 150, 150);
   }
 
   startGame() {
@@ -31,10 +33,18 @@ class Game {
     this.mainMenu.style.display = "none";
     this.gameContainer.style.display = "flex";
     this.usedPositions = [];
-    this.gmaIntervalId = setInterval(() => {
+    this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, Math.round(1000 / 60));
-
+    this.player.move();
+  }
+  gameLoop() {
+    this.update();
+    if (this.gameOver) {
+      clearInterval(this.gameIntervalId);
+    }
+  }
+  update() {
     this.spawnCountVillans = 0;
     this.spawnVillanInterval = setInterval(() => {
       this.spawnVillan();
@@ -48,12 +58,6 @@ class Game {
     this.spawnCivilianInterval = setInterval(() => {
       this.spawnCivilian();
     }, 3000);
-  }
-  gameLoop() {
-    this.update();
-    if (this.gameOver) {
-      clearInterval(this.gmaIntervalId);
-    }
   }
   spawnVillan() {
     const place =
@@ -90,8 +94,6 @@ class Game {
         }
       });
       place.isActivated = true;
-    } else {
-      this.spawnVillan();
     }
   }
 
@@ -124,13 +126,10 @@ class Game {
           place.isActivated = false;
         }
       }, 5000);
-    } else {
-      this.spawnCivilian();
     }
   }
   winner() {
     this.gameContainer.style.display = "none";
-    this.endGame.style.display = "none";
     this.winnerScreen.style.display = "block";
     clearInterval(this.spawnVillanInterval);
     clearInterval(this.spawnCivilianInterval);
@@ -138,18 +137,17 @@ class Game {
   gameOver() {
     this.endGame.style.display = "block";
     this.gameContainer.style.display = "none";
-    this.winnerScreen.style.display = "none";
     clearInterval(this.spawnVillanInterval);
     clearInterval(this.spawnCivilianInterval);
   }
   clearSpawn() {
     this.position = [
-      { top: 120, left: 320, isActivated: false },
-      { top: 500, left: 250, isActivated: false },
-      { top: 190, left: 750, isActivated: false },
-      { top: 460, left: 750, isActivated: false },
-      { top: 200, left: 1100, isActivated: false },
-      { top: 500, left: 1100, isActivated: false },
+      { top: 950, left: 1900, isActivated: false },
+      { top: 900, left: 1270, isActivated: false },
+      { top: 900, left: 750, isActivated: false },
+      { top: 340, left: 320, isActivated: false },
+      { top: 475, left: 1270, isActivated: false },
+      { top: 400, left: 1900, isActivated: false },
     ];
     const cowboy = document.querySelectorAll(".cowboy");
     cowboy.forEach((img) => {

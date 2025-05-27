@@ -28,6 +28,7 @@
   line-height: 1;
 }
 .village {
+  position: relative;
   margin: auto;
   background-size: cover;
   background-position: center;
