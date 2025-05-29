@@ -16,12 +16,12 @@ class Obstacle {
 
     this.gameScreen.appendChild(this.element);
   }
-  updatePosition() {
-    this.element.style.left = `${this.left}px`;
-    this.element.style.top = `${this.top}px`;
-  }
   move() {
     this.top += 3;
     this.updatePosition();
+  }
+  updatePosition() {
+    this.element.style.left = `${this.left}px`;
+    this.element.style.top = `${this.top}px`;
   }
 }
