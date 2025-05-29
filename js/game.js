@@ -37,6 +37,7 @@ class Game {
       this.gameLoop();
     }, Math.round(1000 / 60));
     this.player.move();
+    this.obstacleInterval = setInterval(() => {});
   }
   gameLoop() {
     this.update();
@@ -64,7 +65,7 @@ class Game {
       this.position[Math.floor(Math.random() * this.position.length)];
     if (place.isActivated === false) {
       const img = document.createElement("img");
-      img.src = "./images/cowboy.PNG";
+      img.src = "./images/cowboy.png";
       img.alt = "Cowboy";
       img.style.position = "absolute";
       img.style.top = place.top + "px";
