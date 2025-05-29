@@ -64,7 +64,7 @@ class Game {
       this.position[Math.floor(Math.random() * this.position.length)];
     if (place.isActivated === false) {
       const img = document.createElement("img");
-      img.src = "/styles/cowboy.PNG";
+      img.src = "../styles/cowboy.PNG";
       img.alt = "Cowboy";
       img.style.position = "absolute";
       img.style.top = place.top + "px";
