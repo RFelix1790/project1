@@ -6,8 +6,14 @@ class Game {
     this.winnerScreen = document.getElementById("winnerScreen");
     this.scoreElm = document.querySelector(".score");
     this.livesElm = document.querySelector(".lives");
+    this.killCountElm = document.querySelector(".kills");
+    this.innocentsElm = document.querySelector(".innocents");
+    this.dodgeElm = document.querySelector(".dodge");
     this.score = 0;
     this.lives = 3;
+    this.killCount = 0;
+    this.innocents = 0;
+    this.dodge = 0;
     this.spawn = null;
     this.height = 600;
     this.width = 500;
@@ -23,13 +29,27 @@ class Game {
     this.obstacleInterval = null;
     this.obstacles = [];
     this.player = new Player(this.gameContainer, 1200, 1100, 150, 150);
+    this.backgroungMusic = new Audio("./images/music.wav");
+    this.backgroungMusic.loop = true;
+    this.backgroungMusic.volume = 0.1;
+    this.shot = new Audio("./images/gun.wav");
+    this.shot.volume = 0.2;
+    this.bestShot = new Audio("/images/bestshot.wav");
   }
 
   startGame() {
+    this.backgroungMusic.play();
+    this.bestShot.play();
     this.score = 0;
     this.lives = 3;
+    this.killCount = 0;
+    this.innocents = 0;
+    this.dodge = 0;
     this.scoreElm.innerText = `score: ${this.score}`;
     this.livesElm.innerText = `lives: ${this.lives}`;
+    this.killCountElm.innerText = `kills :${this.killCount}`;
+    this.innocentsElm.innerText = `innocents: ${this.innocents}`;
+    this.dodgeElm.innerText = `objects dodge: ${this.dodge}`;
     this.mainMenu.style.display = "none";
     this.gameContainer.style.display = "flex";
     this.usedPositions = [];
@@ -86,10 +106,27 @@ class Game {
       }, 5000);
       img.addEventListener("click", () => {
         clearTimeout(timeout);
+        this.shot.play();
+        const bang = document.createElement("img");
+        bang.src =
+          "https://bridgetregankolek.wordpress.com/wp-content/uploads/2013/09/bang.gif";
+        bang.style.width = "150px";
+        bang.style.height = "150px";
+        bang.style.position = "absolute";
+        const containerRect = this.gameContainer.getBoundingClientRect();
+
+        bang.style.left = event.clientX - containerRect.left - 100 + "px";
+        bang.style.top = event.clientY - containerRect.top - 100 + "px";
+        this.gameContainer.appendChild(bang);
+        setTimeout(() => {
+          bang.remove();
+        }, 1000);
         place.isActivated = false;
         img.remove();
         this.score += 10;
         this.scoreElm.innerText = `score: ${this.score}`;
+        this.killCount += 1;
+        this.killCountElm.innerText = `kills :${this.killCount}`;
         if (this.score >= 100) {
           this.winner();
         }
@@ -114,9 +151,26 @@ class Game {
       place.isActivated = true;
       img.addEventListener("click", () => {
         place.isActivated = false;
+        this.shot.play();
+        const bang = document.createElement("img");
+        bang.src =
+          "https://cdn.pixabay.com/photo/2022/05/02/16/15/oops-7169963_1280.png";
+        bang.style.width = "100px";
+        bang.style.height = "100px";
+        bang.style.position = "absolute";
+        const containerRect = this.gameContainer.getBoundingClientRect();
+
+        bang.style.left = event.clientX - containerRect.left - 100 + "px";
+        bang.style.top = event.clientY - containerRect.top - 100 + "px";
+        this.gameContainer.appendChild(bang);
+        setTimeout(() => {
+          bang.remove();
+        }, 1000);
         img.remove();
         this.lives--;
         this.livesElm.innerText = `lives: ${this.lives}`;
+        this.innocents += 1;
+        this.innocentsElm.innerText = `innocents: ${this.innocents}`;
         if (this.lives <= 0) {
           this.gameOver();
         }

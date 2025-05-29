@@ -2,17 +2,42 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
+  background-image: url(../images/duelo.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-
+#mainMenu p,
+#mainMenu h1,
+#mainMenu button {
+  user-select: none;
+}
+#mainMenu button {
+  background-color: rgba(121, 97, 97, 0.267);
+  color: black;
+  font-size: larger;
+  border: none;
+  font-size: 30px;
+}
+#mainMenu h1 {
+  font-size: 70px;
+  display: flex;
+  margin-bottom: 50%;
+}
+#mainMenu p {
+  font-size: 30px;
+  line-height: 2;
+}
 #gameContainer {
   display: none;
   justify-content: center;
   align-items: center;
   height: 100vh;
   position: relative;
+  background-color: rgba(19, 6, 6, 0.499);
 }
 .hud {
   position: absolute;
@@ -21,11 +46,38 @@
   z-index: 10;
   color: white;
   font-size: 30px;
+  user-select: none;
+  pointer-events: none;
 }
 .score,
 .lives {
   margin: 0;
-  line-height: 1;
+  line-height: 2;
+  font-size: 50px;
+  position: relative;
+  right: 200px;
+  color: black;
+}
+.kills {
+  font-size: 75px;
+  position: relative;
+  left: 2000px;
+  color: black;
+  pointer-events: none;
+}
+.innocents {
+  font-size: 75px;
+  position: relative;
+  left: 1900px;
+  color: black;
+  pointer-events: none;
+}
+.dodge {
+  font-size: 60px;
+  position: relative;
+  left: 1900px;
+  color: black;
+  pointer-events: none;
 }
 .village {
   position: relative;
