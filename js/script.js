@@ -29,6 +29,7 @@ window.onload = function () {
     element.addEventListener("click", () => {
       clearInterval(game.spawnVillanInterval);
       clearInterval(game.spawnCivilianInterval);
+      clearInterval(game.obstacleInterval);
       game.clearSpawn();
       game.startGame();
       game.endGame.style.display = "none";

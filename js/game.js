@@ -27,11 +27,11 @@ class Game {
     ];
     this.gameIntervalId = null;
     this.obstacleInterval = null;
-    this.obstacles = [];
+    this.obstacleArray = [];
     this.player = new Player(this.gameContainer, 1200, 1100, 150, 150);
-    this.backgroungMusic = new Audio("./images/music.wav");
-    this.backgroungMusic.loop = true;
-    this.backgroungMusic.volume = 0.1;
+    this.oungMusic = new Audio("./images/music.wav");
+    this.backgroundMusic.loop = true;
+    this.backgroundMusic.volume = 0.1;
     this.shot = new Audio("./images/gun.wav");
     this.shot.volume = 0.2;
     this.bestShot = new Audio("./images/bestshot.wav");
@@ -44,8 +44,8 @@ class Game {
   }
 
   startGame() {
-    //this.backgroungMusic.play();
-    //this.bestShot.play();
+    this.backgroundMusic.play();
+    this.bestShot.play();
     this.score = 0;
     this.lives = 3;
     this.killCount = 0;
@@ -63,31 +63,60 @@ class Game {
       this.gameLoop();
     }, Math.round(1000 / 60));
     this.player.move();
-    this.obstacleInterval = setInterval(() => {});
-    this.isGameOver = false;
-    this.isWIN = false;
-  }
-  gameLoop() {
-    this.update();
-    if (this.gameOver) {
-      this.backgroungMusic.pause;
-      clearInterval(this.gameIntervalId);
-    }
-  }
-  update() {
+    this.obstacleInterval = setInterval(() => {
+      const newObstacle = new Obstacle(this.gameContainer);
+      this.obstacleArray.push(newObstacle);
+    }, 3000);
+
     this.spawnCountVillans = 0;
     this.spawnVillanInterval = setInterval(() => {
       this.spawnVillan();
       this.spawnCountVillans++;
-      if (this.spawnCountVillans >= 100) {
-        clearInterval(this.spawnVillanInterval);
-      }
     }, 1000);
-
     this.spawnCountCivilian = 0;
     this.spawnCivilianInterval = setInterval(() => {
       this.spawnCivilian();
     }, 2000);
+    this.isGameOver = false;
+    this.isWIN = false;
+  }
+  gameLoop() {
+    this.obstacleArray.forEach((obstacle, index) => {
+      obstacle.move();
+
+      if (this.player.didCollide(obstacle)) {
+        this.lives--;
+        this.livesElm.innerText = `lives: ${this.lives}`;
+        obstacle.element.remove();
+        this.obstacleArray.splice(index, 1);
+        const hit = document.createElement("img");
+        hit.src = "../images/obstacleGif.png";
+        hit.style.width = "100px";
+        hit.style.height = "100px";
+        hit.style.position = "absolute";
+        const containerRect = this.gameContainer.getBoundingClientRect();
+
+        hit.style.left = obstacle.left + "px";
+        hit.style.top = obstacle.top + "px";
+        this.gameContainer.appendChild(hit);
+        setTimeout(() => {
+          hit.remove();
+        }, 1000);
+
+        if (this.lives <= 0) {
+          this.gameOver();
+        }
+      } else if (obstacle.top > 1200) {
+        this.dodge++;
+        this.dodgeElm.innerText = `objects dodge: ${this.dodge}`;
+        obstacle.element.remove();
+        this.obstacleArray.splice(index, 1);
+      }
+    });
+    if (this.isGameOver) {
+      this.backgroundMusic.pause();
+      clearInterval(this.gameIntervalId);
+    }
   }
   spawnVillan() {
     const place =
@@ -104,6 +133,21 @@ class Game {
       this.gameContainer.appendChild(img);
       const timeout = setTimeout(() => {
         if (img.isConnected) {
+          this.shot.play();
+          const bang = document.createElement("img");
+          bang.src =
+            "https://bridgetregankolek.wordpress.com/wp-content/uploads/2013/09/bang.gif";
+          bang.style.width = "150px";
+          bang.style.height = "150px";
+          bang.style.position = "absolute";
+          const containerRect = this.gameContainer.getBoundingClientRect();
+
+          bang.style.left = this.player.left + "px";
+          bang.style.top = this.player.top - 100 + "px";
+          this.gameContainer.appendChild(bang);
+          setTimeout(() => {
+            bang.remove();
+          }, 1000);
           place.isActivated = false;
           img.remove();
           this.lives--;
@@ -199,8 +243,9 @@ class Game {
     this.winnerScreen.style.display = "block";
     clearInterval(this.spawnVillanInterval);
     clearInterval(this.spawnCivilianInterval);
-    this.backgroungMusic.pause();
-    this.backgroungMusic.currentTime = 0;
+    clearInterval(this.obstacleInterval);
+    this.backgroundMusic.pause();
+    this.backgroundMusic.currentTime = 0;
     this.winAudio.play();
   }
   gameOver() {
@@ -210,8 +255,9 @@ class Game {
     this.gameContainer.style.display = "none";
     clearInterval(this.spawnVillanInterval);
     clearInterval(this.spawnCivilianInterval);
-    this.backgroungMusic.pause();
-    this.backgroungMusic.currentTime = 0;
+    clearInterval(this.obstacleInterval);
+    this.backgroundMusic.pause();
+    this.backgroundMusic.currentTime = 0;
     this.gameOverAudio.play();
   }
   clearSpawn() {
@@ -230,7 +276,12 @@ class Game {
     const civilian = document.querySelectorAll(".civilian");
     civilian.forEach((img) => {
       img.remove();
-      this.position.forEach((Element) => (Element.isActivated = false));
     });
+    this.position.forEach((Element) => (Element.isActivated = false));
+    const obstacle = document.querySelectorAll(".obstacle");
+    obstacle.forEach((img) => {
+      img.remove();
+    });
+    this.obstacleArray = [];
   }
 }
