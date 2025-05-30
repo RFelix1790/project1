@@ -38,6 +38,8 @@ window.onload = function () {
       }
       game.player = new Player(game.gameContainer, 1200, 1100, 150, 150);
     });
+    game.winAudio.pause();
+    game.gameOverAudio.pause();
   });
 
   backToMainMenu.forEach((element) => {
@@ -47,6 +49,8 @@ window.onload = function () {
       game.gameContainer.style.display = "none";
       game.endGame.style.display = "none";
       game.winnerScreen.style.display = "none";
+      game.winAudio.pause();
+      game.gameOverAudio.pause();
     });
   });
 };

@@ -34,12 +34,18 @@ class Game {
     this.backgroungMusic.volume = 0.1;
     this.shot = new Audio("./images/gun.wav");
     this.shot.volume = 0.2;
-    this.bestShot = new Audio("/images/bestshot.wav");
+    this.bestShot = new Audio("./images/bestshot.wav");
+    this.gameOverAudio = new Audio("./images/audio-Game-Over.wav");
+    this.gameOverAudio.volume = 0.3;
+    this.isGameOver = false;
+    this.winAudio = new Audio("./images/winAudio.wav");
+    this.winAudio.volume = 0.3;
+    this.isWIN = false;
   }
 
   startGame() {
-    this.backgroungMusic.play();
-    this.bestShot.play();
+    //this.backgroungMusic.play();
+    //this.bestShot.play();
     this.score = 0;
     this.lives = 3;
     this.killCount = 0;
@@ -58,10 +64,13 @@ class Game {
     }, Math.round(1000 / 60));
     this.player.move();
     this.obstacleInterval = setInterval(() => {});
+    this.isGameOver = false;
+    this.isWIN = false;
   }
   gameLoop() {
     this.update();
     if (this.gameOver) {
+      this.backgroungMusic.pause;
       clearInterval(this.gameIntervalId);
     }
   }
@@ -78,7 +87,7 @@ class Game {
     this.spawnCountCivilian = 0;
     this.spawnCivilianInterval = setInterval(() => {
       this.spawnCivilian();
-    }, 3000);
+    }, 2000);
   }
   spawnVillan() {
     const place =
@@ -184,16 +193,26 @@ class Game {
     }
   }
   winner() {
+    if (this.isWIN) return;
+    this.isWIN = true;
     this.gameContainer.style.display = "none";
     this.winnerScreen.style.display = "block";
     clearInterval(this.spawnVillanInterval);
     clearInterval(this.spawnCivilianInterval);
+    this.backgroungMusic.pause();
+    this.backgroungMusic.currentTime = 0;
+    this.winAudio.play();
   }
   gameOver() {
+    if (this.isGameOver) return;
+    this.isGameOver = true;
     this.endGame.style.display = "block";
     this.gameContainer.style.display = "none";
     clearInterval(this.spawnVillanInterval);
     clearInterval(this.spawnCivilianInterval);
+    this.backgroungMusic.pause();
+    this.backgroungMusic.currentTime = 0;
+    this.gameOverAudio.play();
   }
   clearSpawn() {
     this.position = [
