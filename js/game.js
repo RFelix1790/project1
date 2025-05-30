@@ -29,7 +29,7 @@ class Game {
     this.obstacleInterval = null;
     this.obstacleArray = [];
     this.player = new Player(this.gameContainer, 1200, 1100, 150, 150);
-    this.oungMusic = new Audio("./images/music.wav");
+    this.backgroundMusic = new Audio("./images/music.wav");
     this.backgroundMusic.loop = true;
     this.backgroundMusic.volume = 0.1;
     this.shot = new Audio("./images/gun.wav");
