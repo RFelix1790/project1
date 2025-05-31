@@ -67,7 +67,7 @@ class Game {
     this.obstacleInterval = setInterval(() => {
       const newObstacle = new Obstacle(this.gameContainer);
       this.obstacleArray.push(newObstacle);
-    }, 3000);
+    }, 1000);
 
     this.spawnCountVillans = 0;
     this.spawnVillanInterval = setInterval(() => {
@@ -160,7 +160,7 @@ class Game {
             this.gameOver();
           }
         }
-      }, 5000);
+      }, 4000);
       this.cowboyTimeouts.push(timeout);
       img.addEventListener("click", () => {
         clearTimeout(timeout);
@@ -185,7 +185,7 @@ class Game {
         this.scoreElm.innerText = `score: ${this.score}`;
         this.killCount += 1;
         this.killCountElm.innerText = `kills :${this.killCount}`;
-        if (this.score >= 100) {
+        if (this.score >= 200) {
           this.winner();
         }
       });
