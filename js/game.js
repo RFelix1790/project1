@@ -39,7 +39,7 @@ class Game {
     this.gameOverAudio.volume = 0.3;
     this.isGameOver = false;
     this.winAudio = new Audio("./images/winAudio.wav");
-    this.winAudio.volume = 0.3;
+    this.winAudio.volume = 0.2;
     this.isWIN = false;
     this.cowboyTimeouts = [];
   }
