@@ -185,7 +185,7 @@ class Game {
         this.scoreElm.innerText = `score: ${this.score}`;
         this.killCount += 1;
         this.killCountElm.innerText = `kills :${this.killCount}`;
-        if (this.score >= 200) {
+        if (this.score >= 150) {
           this.winner();
         }
       });
