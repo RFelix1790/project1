@@ -36,7 +36,7 @@ class Game {
     this.shot.volume = 0.2;
     this.bestShot = new Audio("./images/bestshot.wav");
     this.gameOverAudio = new Audio("./images/audio-Game-Over.wav");
-    this.gameOverAudio.volume = 0.3;
+    this.gameOverAudio.volume = 0.2;
     this.isGameOver = false;
     this.winAudio = new Audio("./images/winAudio.wav");
     this.winAudio.volume = 0.2;
