@@ -90,7 +90,7 @@ class Game {
         obstacle.element.remove();
         this.obstacleArray.splice(index, 1);
         const hit = document.createElement("img");
-        hit.src = "./images/obstaclegif.png";
+        hit.src = "../images/obstaclegif.png";
         hit.style.width = "100px";
         hit.style.height = "100px";
         hit.style.position = "absolute";
