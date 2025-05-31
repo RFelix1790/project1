@@ -91,7 +91,8 @@ class Game {
         obstacle.element.remove();
         this.obstacleArray.splice(index, 1);
         const hit = document.createElement("img");
-        hit.src = "../images/obstaclegif.png";
+        hit.src =
+          "https://cdna.artstation.com/p/assets/images/images/065/736/110/original/claude-tachnakian-fumee-001d.gif?1691082060";
         hit.style.width = "100px";
         hit.style.height = "100px";
         hit.style.position = "absolute";
