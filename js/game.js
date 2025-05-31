@@ -90,7 +90,7 @@ class Game {
         obstacle.element.remove();
         this.obstacleArray.splice(index, 1);
         const hit = document.createElement("img");
-        hit.src = "./images/obstacleGif.png";
+        hit.src = "./images/obstaclegif.png";
         hit.style.width = "100px";
         hit.style.height = "100px";
         hit.style.position = "absolute";
@@ -244,6 +244,7 @@ class Game {
     clearInterval(this.spawnVillanInterval);
     clearInterval(this.spawnCivilianInterval);
     clearInterval(this.obstacleInterval);
+    this.shot.pause();
     this.backgroundMusic.pause();
     this.backgroundMusic.currentTime = 0;
     this.winAudio.play();
@@ -256,6 +257,7 @@ class Game {
     clearInterval(this.spawnVillanInterval);
     clearInterval(this.spawnCivilianInterval);
     clearInterval(this.obstacleInterval);
+    this.shot.pause();
     this.backgroundMusic.pause();
     this.backgroundMusic.currentTime = 0;
     this.gameOverAudio.play();
