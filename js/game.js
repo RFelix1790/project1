@@ -41,6 +41,7 @@ class Game {
     this.winAudio = new Audio("./images/winAudio.wav");
     this.winAudio.volume = 0.3;
     this.isWIN = false;
+    this.cowboyTimeouts = [];
   }
 
   startGame() {
@@ -157,6 +158,7 @@ class Game {
           }
         }
       }, 5000);
+      this.cowboyTimeouts.push(timeout);
       img.addEventListener("click", () => {
         clearTimeout(timeout);
         this.shot.play();
@@ -244,6 +246,8 @@ class Game {
     clearInterval(this.spawnVillanInterval);
     clearInterval(this.spawnCivilianInterval);
     clearInterval(this.obstacleInterval);
+    this.cowboyTimeouts.forEach((timeoutid) => clearTimeout(timeoutid));
+    this.cowboyTimeouts = [];
     this.shot.pause();
     this.backgroundMusic.pause();
     this.backgroundMusic.currentTime = 0;
@@ -257,6 +261,8 @@ class Game {
     clearInterval(this.spawnVillanInterval);
     clearInterval(this.spawnCivilianInterval);
     clearInterval(this.obstacleInterval);
+    this.cowboyTimeouts.forEach((timeoutid) => clearTimeout(timeoutid));
+    this.cowboyTimeouts = [];
     this.shot.pause();
     this.backgroundMusic.pause();
     this.backgroundMusic.currentTime = 0;
