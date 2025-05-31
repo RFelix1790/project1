@@ -9,11 +9,11 @@ window.onload = function () {
   });
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") {
-      game.player.directionX += 3;
+      game.player.directionX += 2;
       game.player.move();
     }
     if (e.key === "ArrowLeft") {
-      game.player.directionX += -3;
+      game.player.directionX += -2;
       game.player.move();
     }
   });
